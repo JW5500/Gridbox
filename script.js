@@ -1,22 +1,23 @@
-let colorSelected;
-let LastColorSelected;
+let colorSelected = "white";
+let LastColorSelected = "white";
 
 function setColor() {
+    LastColorSelected = colorSelected;
     colorSelected = document.getElementById("selectedID").value;
 }
 
 function createCell() {
-    const cell = document.createElement("td");
+    let cell = document.createElement("td");
     cell.onclick = () => cell.style.backgroundColor = colorSelected;
     return cell;
 }
 
 function addRow() {
-    const grid = document.querySelector("#grid");
-    const rows = grid.querySelectorAll("tr");
-    const numCols = rows[0] ? rows[0].children.length : 1;
+    let grid = document.querySelector("#grid");
+    let rows = grid.querySelectorAll("tr");
+    let numCols = rows[0] ? rows[0].children.length : 1;
 
-    const row = document.createElement("tr");
+    let row = document.createElement("tr");
     for (let i = 0; i < numCols; i++) {
         row.appendChild(createCell());
     }
@@ -24,7 +25,7 @@ function addRow() {
 }
 
 function addColumn() {
-    const rows = document.querySelectorAll("#grid tr");
+    let rows = document.querySelectorAll("#grid tr");
 
     if (rows.length === 0) {
         addRow();
@@ -34,8 +35,8 @@ function addColumn() {
 }
 
 function removeRow() {
-    const grid = document.querySelector("#grid");
-    const rows = grid.querySelectorAll("tr");
+    let grid = document.querySelector("#grid");
+    let rows = grid.querySelectorAll("tr");
 
     if (rows.length === 0) {
         alert("There are no more rows to remove.");
@@ -45,7 +46,7 @@ function removeRow() {
 }
 
 function removeColumn() {
-    const rows = document.querySelectorAll("#grid tr");
+    let rows = document.querySelectorAll("#grid tr");
 
     if (rows.length === 0) {
         alert("There are no more columns to remove.");
@@ -58,6 +59,11 @@ function removeColumn() {
 }
 
 function fillAll() {
+    if(colorSelected == "white" || colorSelected === "rgb(255,255,255)"){
+        alert("Please select the LastColor or pick another color before filling all!");
+        return;
+    }
+
     document.querySelectorAll("#grid td").forEach(cell => {
         cell.style.backgroundColor = colorSelected;
     });
@@ -65,7 +71,7 @@ function fillAll() {
 
 function fillUncolored() {
     document.querySelectorAll("#grid td").forEach(cell => {
-        if (!cell.style.backgroundColor) {
+        if (cell.style.backgroundColor == "" || cell.style.backgroundColor == "white" || cell.style.backgroundColor === "rgb(255,255,255)") {
             cell.style.backgroundColor = colorSelected;
         }
     });
