@@ -7,3 +7,10 @@ td{
     width: 50px;
     background-color: white;
 }
+
+body{
+    font-family: 'Poppins', sans-serif;
+
+    background: rgb(175,201,58);
+    background: linear-gradient(90deg, rgba(175,201,58,1) 28%, rgba(83,157,154,1) 50%, rgba(231,57,255,1) 85%);
+}
