@@ -5,14 +5,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button onclick="GridActions.addRow()">Add Row</button>
-    <button onclick="GridActions.addColumn()">Add Col</button>
-    <button onclick="GridActions.removeRow()">Remove Row</button>
-    <button onclick="GridActions.removeColumn()">Remove Col</button>
-    <button onclick="GridActions.fillUncolored()">Fill All Uncolored</button>
-    <button onclick="GridActions.fillAll()">Fill All</button>
-    <button onclick="GridActions.clearAll()">Clear</button>
-    <input type="color" id="selectedID" onchange="GridActions.setColor()">
+    <button onclick="addRow()">Add Row</button>
+    <button onclick="addColumn()">Add Col</button>
+    <button onclick="removeRow()">Remove Row</button>
+    <button onclick="removeColumn()">Remove Col</button>
+    <button onclick="fillUncolored()">Fill All Uncolored</button>
+    <button onclick="fillAll()">Fill All</button>
+    <button onclick="clearAll()">Clear</button>
+    <button onclick="eraser()">Eraser</button>
+    <input type="color" id="selectedID" onchange="setColor()">
+    <button onclick="LastColor()">LastColor</button>
     <table id="grid">
     </table>
     <script src="script.js"></script>
