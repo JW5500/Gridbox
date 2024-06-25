@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>GrindMaker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Grid</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button onclick="AddRow()">Add Row</button>
-    <button onclick="AddCol()">Add Col</button>
-    <button onclick="RemoveRow()">Remove Row</button>
-    <button onclick="RemoveCol()">Remove Col</button>
-    <button onclick="FillU()">Fill All Uncolored</button>
-    <button onclick="Fill()">Fill All</button>
-    <button onclick="Clear()">Clear</button>
-    <select onchange="selected()" id="selectedID">
-        <option value="SELECT">SELECT</option>
-        <option value="Red">Red</option>
-        <option value="Green">Green</option>
-        <option value="Blue">Blue</option>
-        <option value="Yellow">Yellow</option>
-    </select>
-    <table id="Grid"></table>
-    <script src="grind.js"></script>
+    <button onclick="GridActions.addRow()">Add Row</button>
+    <button onclick="GridActions.addColumn()">Add Col</button>
+    <button onclick="GridActions.removeRow()">Remove Row</button>
+    <button onclick="GridActions.removeColumn()">Remove Col</button>
+    <button onclick="GridActions.fillUncolored()">Fill All Uncolored</button>
+    <button onclick="GridActions.fillAll()">Fill All</button>
+    <button onclick="GridActions.clearAll()">Clear</button>
+    <input type="color" id="selectedID" onchange="GridActions.setColor()">
+    <table id="grid">
+    </table>
+    <script src="script.js"></script>
 </body>
 </html>
