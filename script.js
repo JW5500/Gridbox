@@ -1,89 +1,87 @@
-let GridActions = (() => {
-    let colorSelected;
+let colorSelected;
+let LastColorSelected;
 
-    function setColor() {
-        colorSelected = document.getElementById("selectedID").value;
+function setColor() {
+    colorSelected = document.getElementById("selectedID").value;
+}
+
+function createCell() {
+    const cell = document.createElement("td");
+    cell.onclick = () => cell.style.backgroundColor = colorSelected;
+    return cell;
+}
+
+function addRow() {
+    const grid = document.querySelector("#grid");
+    const rows = grid.querySelectorAll("tr");
+    const numCols = rows[0] ? rows[0].children.length : 1;
+
+    const row = document.createElement("tr");
+    for (let i = 0; i < numCols; i++) {
+        row.appendChild(createCell());
     }
+    grid.appendChild(row);
+}
 
-    function createCell() {
-        const cell = document.createElement("td");
-        cell.onclick = () => cell.style.backgroundColor = colorSelected;
-        return cell;
+function addColumn() {
+    const rows = document.querySelectorAll("#grid tr");
+
+    if (rows.length === 0) {
+        addRow();
+    } else {
+        rows.forEach(row => row.appendChild(createCell()));
     }
+}
 
-    function addRow() {
-        const grid = document.querySelector("#grid");
-        const rows = grid.querySelectorAll("tr");
-        const numCols = rows[0] ? rows[0].children.length : 1;
+function removeRow() {
+    const grid = document.querySelector("#grid");
+    const rows = grid.querySelectorAll("tr");
 
-        const row = document.createElement("tr");
-        for (let i = 0; i < numCols; i++) {
-            row.appendChild(createCell());
-        }
-        grid.appendChild(row);
+    if (rows.length === 0) {
+        alert("There are no more rows to remove.");
+    } else {
+        grid.removeChild(rows[rows.length - 1]);
     }
+}
 
-    function addColumn() {
-        const rows = document.querySelectorAll("#grid tr");
+function removeColumn() {
+    const rows = document.querySelectorAll("#grid tr");
 
-        if (rows.length === 0) {
-            addRow();
-        } else {
-            rows.forEach(row => row.appendChild(createCell()));
-        }
+    if (rows.length === 0) {
+        alert("There are no more columns to remove.");
+    } else if (rows[0].children.length === 1) {
+        document.querySelector("#grid").innerHTML = "";
+        alert("The last column was removed. The grid is now empty.");
+    } else {
+        rows.forEach(row => row.removeChild(row.lastElementChild));
     }
+}
 
-    function removeRow() {
-        const grid = document.querySelector("#grid");
-        const rows = grid.querySelectorAll("tr");
+function fillAll() {
+    document.querySelectorAll("#grid td").forEach(cell => {
+        cell.style.backgroundColor = colorSelected;
+    });
+}
 
-        if (rows.length === 0) {
-            alert("There is nothing to delete");
-        } else {
-            grid.removeChild(rows[rows.length - 1]);
-        }
-    }
-
-    function removeColumn() {
-        const rows = document.querySelectorAll("#grid tr");
-
-        if (rows.length === 0) {
-            alert("There is nothing to delete");
-        } else if (rows[0].children.length === 1) {
-            document.querySelector("#grid").innerHTML = "";
-        } else {
-            rows.forEach(row => row.removeChild(row.lastElementChild));
-        }
-    }
-
-    function fillAll() {
-        document.querySelectorAll("#grid td").forEach(cell => {
+function fillUncolored() {
+    document.querySelectorAll("#grid td").forEach(cell => {
+        if (!cell.style.backgroundColor) {
             cell.style.backgroundColor = colorSelected;
-        });
-    }
+        }
+    });
+}
 
-    function fillUncolored() {
-        document.querySelectorAll("#grid td").forEach(cell => {
-            if (!cell.style.backgroundColor) {
-                cell.style.backgroundColor = colorSelected;
-            }
-        });
-    }
+function clearAll() {
+    document.querySelectorAll("#grid td").forEach(cell => {
+        cell.style.backgroundColor = "";
+    });
+}
 
-    function clearAll() {
-        document.querySelectorAll("#grid td").forEach(cell => {
-            cell.style.backgroundColor = "";
-        });
-    }
+function eraser(){
+    colorSelected = "white";
+}
 
-    return {
-        setColor,
-        addRow,
-        addColumn,
-        removeRow,
-        removeColumn,
-        fillAll,
-        fillUncolored,
-        clearAll
-    };
-})();
+function LastColor(){
+    colorSelected = LastColorSelected;
+    document.getElementById("selectedID").value = colorSelected;
+}
